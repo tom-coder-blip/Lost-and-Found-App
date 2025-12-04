@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Delete</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1>⚠️ Confirm Deletion</h1>
+
+<div th:if="${item != null}">
+    <p>Are you sure you want to delete the item:</p>
+    <h2 th:text="${item.title}">Item Title</h2>
+    <p><strong>Status:</strong> <span th:text="${item.status}">Status</span></p>
+    <p><strong>Location:</strong> <span th:text="${item.location}">Location</span></p>
+
+    <form th:action="@{'/items/delete/' + ${item.id}}" method="post">
+        <button type="submit"> Yes, Delete</button>
+        <a th:href="@{'/items/' + ${item.id}}">❌ Cancel</a>
+    </form>
+</div>
+
+<div th:if="${item == null}">
+    <p>Item not found.</p>
+</div>
+</body>
+</html>

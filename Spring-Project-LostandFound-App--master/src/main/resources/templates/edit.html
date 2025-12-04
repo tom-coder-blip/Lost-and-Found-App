@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Item</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1>✏️ Edit Item</h1>
+
+<form th:action="@{'/items/update/' + ${item.id}}" method="post" th:object="${item}">
+    <label>Title:</label><br>
+    <input type="text" th:field="*{title}" required><br><br>
+
+    <label>Description:</label><br>
+    <textarea th:field="*{description}" required></textarea><br><br>
+
+    <label>Category:</label><br>
+    <input type="text" th:field="*{category}" required><br><br>
+
+    <label>Status:</label><br>
+    <select th:field="*{status}" required>
+        <option value="LOST">Lost</option>
+        <option value="FOUND">Found</option>
+        <option value="CLAIMED">Claimed</option>
+    </select><br><br>
+
+    <label>Location:</label><br>
+    <input type="text" th:field="*{location}" required><br><br>
+
+    <label>Reported By:</label><br>
+    <input type="text" th:field="*{ownerUsername}" required><br><br>
+
+    <label>Contact Info:</label><br>
+    <input type="text" th:field="*{contactInfo}" required><br><br>
+
+    <button type="submit">Update</button>
+</form>
+
+<br>
+<a th:href="@{'/items/' + ${item.id}}">⬅ Back to Details</a>
+</body>
+</html>

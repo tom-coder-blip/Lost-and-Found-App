@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lost & Found Hub</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1>🕵️ Lost & Found Hub</h1>
+
+<a href="/report">➕ Report New Item</a>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Category</th>
+        <th>Location</th>
+        <th>Reported By</th>
+        <th>Date Reported</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.title}">Title</td>
+        <td th:text="${item.status}">Status</td>
+        <td th:text="${item.category}">Category</td>
+        <td th:text="${item.location}">Location</td>
+        <td th:text="${item.ownerUsername}">Reporter</td>
+        <td th:text="${#temporals.format(item.dateReported, 'yyyy-MM-dd HH:mm')}">Date</td>
+        <td><a th:href="@{'/items/' + ${item.id}}">View</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:if="${items.size() == 0}">No items reported yet.</p>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">🚪 Logout</button>
+</form>
+
+<form th:action="@{/delete-account}" method="post">
+    <a href="/confirm-delete-account">🗑️ Delete My Account</a>
+</form>
+</body>
+</html>

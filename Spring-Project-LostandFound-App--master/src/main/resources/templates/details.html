@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Details</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1>🔍 Item Details</h1>
+
+<div th:if="${item != null}">
+    <h2 th:text="${item.title}">Item Title</h2>
+
+    <p><strong>Status:</strong> <span th:text="${item.status}">Status</span></p>
+    <p><strong>Category:</strong> <span th:text="${item.category}">Category</span></p>
+    <p><strong>Location:</strong> <span th:text="${item.location}">Location</span></p>
+    <p><strong>Date Reported:</strong> <span th:text="${#temporals.format(item.dateReported, 'yyyy-MM-dd HH:mm')}">Date</span></p>
+    <p><strong>Description:</strong></p>
+    <p th:text="${item.description}">Description</p>
+    <p><strong>Reported By:</strong> <span th:text="${item.ownerUsername}">Reporter</span></p>
+    <p><strong>Contact Info:</strong> <span th:text="${item.contactInfo}">Contact</span></p>
+</div>
+
+<div th:if="${item == null}">
+    <p>❌ Item not found.</p>
+</div>
+
+<a th:href="@{'/items/edit/' + ${item.id}}">✏️ Edit Item</a>
+<br>
+<a th:href="@{'/items/confirm-delete/' + ${item.id}}">🗑️ Delete Item</a>
+<br>
+<a href="/">⬅ Back to Home</a>
+</body>
+</html>
