@@ -1,14 +1,10 @@
-# Use an official OpenJDK image
-FROM eclipse-temurin:21-jre
-
-# Set the working directory
+FROM maven:3.9.4-eclipse-temurin-21 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the built jar file into the container
-COPY target/lost-and-found-hub-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose the port your app runs on
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY --from=build /app/target/lost-and-found-hub-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8081
-
-# Run the jar file
 ENTRYPOINT ["java", "-jar", "app.jar"]
