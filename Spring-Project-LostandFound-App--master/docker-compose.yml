@@ -4,12 +4,10 @@ services:
     build: .
     ports:
       - "8081:8081"
-    depends_on:
-      - db
     environment:
-      SPRING_DATASOURCE_URL: ${DB_URL}
-      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      DB_URL: jdbc:postgresql://db.qnlcnuxdhqxngnaaiyyu.supabase.co:5432/postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: #Noonecanguessthis
 
   db:
     image: postgres:15
